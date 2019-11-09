@@ -3,13 +3,16 @@ import roslib
 roslib.load_manifest('rr_awsdeepracer')
 import rospy
 from std_msgs.sg import String
+from std_msgs.sg import Header
+from sensor_msgs.msg import Image
 import time
 import sys
 import RobotRaconteur as RR
 import thread 
 import numpy
 import traceback
-
+import cv2;
+import cv2.aruco as aruco
 
 class BaxterCamera_impl(object):
     def __init__(self, camera_name, mode, half_res):

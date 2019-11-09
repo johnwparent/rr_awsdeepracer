@@ -1,9 +1,12 @@
 service ServoInterface
 option version 0.9
 object Servo
-property double[] joint_velocities
-property double[] joint_torques
-function void stop()
-function void start()
-function void setPositionModeSpeed(double speed)
+property double servo_velocitie
+property double serv_torque
+function void Stop()
+function void Close()
+function void setTurn()
+function void Go()
+function void Drive()
+function void stopTurn()
 end object
