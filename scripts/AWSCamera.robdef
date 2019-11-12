@@ -1,0 +1,22 @@
+service AWSCamera_interface
+option version 0.4
+struct AWSImage
+    field int32 width
+    field int32 height
+    field int32 step
+    field uint8 is_bigendian
+    field string encoding
+    field uint8[] data
+end struct
+
+object AWSCamera
+    # camera control functions
+    function void startCamera()
+    
+    # functions to acquire data on the image
+    function AWSImage getCurrentImage()
+    
+    # pipe to stream images through
+    pipe AWSImage ImageStream
+    
+end

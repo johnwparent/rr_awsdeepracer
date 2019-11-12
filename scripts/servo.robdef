@@ -1,12 +1,12 @@
-service ServoInterface
+service servo
 option version 0.9
 object Servo
-property double servo_velocitie
-property double serv_torque
-function void Stop()
-function void Close()
-function void setTurn()
-function void Go()
-function void Drive()
-function void stopTurn()
-end object
+    property double servo_velocity
+    property double serv_torque
+    function void Stop()
+    function void Close()
+    function void setTurn(double speed)
+    function void Go()
+    function void Drive(double speed, double turn)
+    function void stopTurn()
+end
