@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(rr_awsdeepracer)
 
+list(APPEND CMAKE_PREFIX_PATH "/opt/aws/deepracer/share/")
 find_package(catkin
-  REQUIRED
+  REQUIRED COMPONENTS
   rospy
   actionlib
   sensor_msgs
-  control_pkg
+  ctrl_pkg
   trajectory_msgs
   cv_bridge
   dynamic_reconfigure
@@ -18,8 +19,8 @@ catkin_package(
   CATKIN_DEPENDS
   rospy
   actionlib
+  ctrl_pkg
   sensor_msgs
-  control_pkg
   trajectory_msgs
   cv_bridge
   dynamic_reconfigure
