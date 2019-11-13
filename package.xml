@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>baxter_rr_bridge</name>
+  <name>aws_deepracer</name>
   <version>0.0.1</version>
-  <description>A package to bridge the ROS-based control interface for the Rethink Robotics Baxter robot to a Robot Raconteur middleware service</description>
+  <description>A package to bridge the ROS-based control interface for the AWS DeepRacer robot to a Robot Raconteur middleware service</description>
 
   <maintainer email="johnwparent@gmail.com">John WP</maintainer>
   <license>BSD</license>

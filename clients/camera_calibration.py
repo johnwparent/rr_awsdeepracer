@@ -31,16 +31,17 @@ class CameraCalibration(object):
     def reformat(self, awsimg):
         frame = awsimg.data.reshape([awsimg.height,awsimg.width,3],order='C')
         return frame
+    def undistort(self, obj,img):
+        return cv2.undistort(img,obj.mtx,obj.dist,None,obj.mtx)
 
-
-    def Calmain(self,argv):
+    def cal_main(self,argv):
 
         #connect to the webcam service
         url = 'rr+tcp://'+argv[0]+':'+argv[1]+'/?service=AWSCamera'
-        calibration = CameraCalibration()
+        
         try:
             cam = RRN.ConnectService(url)
-        except RR.ConnectionException as RRE:
+        except RRN.ConnectionException as RRE:
             print("Cant find service or something: error: %e",RRE)
             return 1
         
@@ -51,9 +52,9 @@ class CameraCalibration(object):
             #get rr image here
             #send for proccessing
             #todo: thread cause timing
-            image_ = calibration.reformat(cam.GetCurrentImage())
+            image_ = self.reformat(cam.GetCurrentImage())
             grayscale = cv2.cvtColor(image_,cv2.COLOR_BGR2GRAY)
-            final = calibration.points(grayscale)
+            final = self.points(grayscale)
             print("image processed")
             return final
 

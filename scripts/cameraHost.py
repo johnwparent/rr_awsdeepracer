@@ -11,12 +11,11 @@ import RobotRaconteur as RR
 import thread 
 import numpy
 import traceback
-import cv2;
-import cv2.aruco as aruco
+import cv2
 
 class DeepRacerCamera_impl(object):
     def __init__(self, camera_name, mode, half_res):
-        print "Initializing cam Node"
+        print ("Initializing cam Node")
         rospy.init_node('aws_cams', anonymous = True)
         
         

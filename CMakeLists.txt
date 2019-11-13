@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16.0)
+cmake_minimum_required(VERSION 3.5.1)
 project(rr_awsdeepracer)
 
 find_package(catkin
