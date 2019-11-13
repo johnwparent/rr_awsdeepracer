@@ -10,7 +10,7 @@ import thread
 import numpy
 import traceback
 
-from ctrl_msgs.msg import ServoCtrlMsg
+from ctrl_pkg.msg import ServoCtrlMsg
 from std_msgs.msg import Header
 from std_msgs.msg import String
 
