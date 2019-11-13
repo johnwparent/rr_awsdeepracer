@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(rr_awsdeepracer)
 
-list(APPEND CMAKE_PREFIX_PATH "/opt/aws/deepracer/share/")
+list(APPEND CMAKE_PREFIX_PATH "/opt/aws/deepracer/share/ctrl_pkg")
 find_package(catkin
   REQUIRED COMPONENTS
   rospy
