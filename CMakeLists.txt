@@ -5,6 +5,7 @@ list(APPEND CMAKE_PREFIX_PATH "/opt/aws/deepracer/share/ctrl_pkg")
 find_package(catkin
   REQUIRED
   rospy
+  message_generation
   actionlib
   sensor_msgs
   ctrl_pkg
@@ -18,6 +19,7 @@ catkin_python_setup()
 catkin_package(
   CATKIN_DEPENDS
   rospy
+  CATKIN_DEPENDS message_generation
   actionlib
   ctrl_pkg
   sensor_msgs
