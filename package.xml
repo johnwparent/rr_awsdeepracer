@@ -10,7 +10,6 @@
   <author email="johnwparent@gmail.com">John WP</author> 
   <buildtool_depend>catkin</buildtool_depend>
   
-  <build_depend>message_generation</build_depend>
   <build_depend>rospy</build_depend>
   <build_depend>actionlib</build_depend>
   <build_depend>sensor_msgs</build_depend>
@@ -21,7 +20,6 @@
   <build_depend>RobotRaconteur</build_depend>
 
 
-  <exec_depend>message_runtime</exec_depend>
 
   <exec_depend>rospy</exec_depend>
   <exec_depend>actionlib</exec_depend>
