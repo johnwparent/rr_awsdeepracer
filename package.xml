@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>rr_aws_deepracer</name>
+  <name>rr_awsdeepracer</name>
   <version>0.0.1</version>
   <description>A package to bridge the ROS-based control interface for the AWS DeepRacer robot to a Robot Raconteur middleware service</description>
 
