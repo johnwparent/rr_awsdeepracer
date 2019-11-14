@@ -3,7 +3,7 @@ project(rr_awsdeepracer)
 
 list(APPEND CMAKE_PREFIX_PATH "/opt/aws/deepracer/share/ctrl_pkg")
 find_package(catkin
-  REQUIRED COMPONENTS
+  REQUIRED
   rospy
   actionlib
   sensor_msgs
