@@ -8,7 +8,6 @@ find_package(catkin
   message_generation
   actionlib
   sensor_msgs
-  ctrl_pkg
   trajectory_msgs
   cv_bridge
   dynamic_reconfigure
@@ -21,7 +20,6 @@ catkin_package(
   rospy
   CATKIN_DEPENDS message_generation
   actionlib
-  ctrl_pkg
   sensor_msgs
   trajectory_msgs
   cv_bridge
