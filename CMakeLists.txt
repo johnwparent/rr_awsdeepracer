@@ -20,6 +20,7 @@ catkin_package(
   rospy
   CATKIN_DEPENDS message_generation
   actionlib
+  ctrl_pkg
   sensor_msgs
   trajectory_msgs
   cv_bridge
