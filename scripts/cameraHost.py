@@ -2,8 +2,8 @@
 import roslib
 roslib.load_manifest('rr_awsdeepracer')
 import rospy
-from std_msgs.sg import String
-from std_msgs.sg import Header
+from std_msgs.msg import String
+from std_msgs.msg import Header
 from sensor_msgs.msg import Image
 import time
 import sys

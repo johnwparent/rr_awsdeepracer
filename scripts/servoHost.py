@@ -2,7 +2,7 @@
 import roslib
 roslib.load_manifest('rr_awsdeepracer')
 import rospy
-from std_msgs.sg import String
+from std_msgs.msg import String
 import time
 import sys
 import RobotRaconteur as RR
