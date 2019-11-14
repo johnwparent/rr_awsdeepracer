@@ -14,6 +14,21 @@ import traceback
 from ctrl_pkg.msg import ServoCtrlMsg
 from std_msgs.msg import Header
 from std_msgs.msg import String
+service_def ="""
+service servo
+option version 0.9
+object Servo
+    property double servo_velocity
+    property double serv_torque
+    function void Stop()
+    function void Close()
+    function void setTurn(double speed)
+    function void Go()
+    function void Drive(double speed, double turn)
+    function void stopTurn()
+end
+"""
+
 
 class RR_servo_impl(object):
     def __init__(self):
@@ -74,7 +89,7 @@ class RR_servo_impl(object):
 def main():
     obj = RR_servo_impl()
     with RR.ServerNodeSetup("servo",2340):
-        RRN.RegisterServiceTypeFromFile("servo")
+        RRN.RegisterServiceType(service_def)
         RRN.RegisterService("Servo","servo.Servo",obj)
 
         raw_input("Server_started,_press_enter_to_quit...")
