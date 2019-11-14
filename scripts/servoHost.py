@@ -24,8 +24,8 @@ class RR_servo_impl(object):
         self._angle = 0.0
         self._throttle = 0.0
         self._senderStop = ServoCtrlMsg()
-        self._sender.angle = 0.0
-        self._sender.throttle = 0.0
+        self._senderStop.angle = 0.0
+        self._senderStop.throttle = 0.0
         self._senderGo = ServoCtrlMsg()
         self._senderGo.angle = 0.0
         self._senderGo.throttle = 0.1
