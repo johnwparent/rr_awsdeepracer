@@ -6,6 +6,7 @@ from std_msgs.msg import String
 import time
 import sys
 import RobotRaconteur as RR
+RRN=RR.RobotRaconteurNode.s
 import thread 
 import numpy
 import traceback
