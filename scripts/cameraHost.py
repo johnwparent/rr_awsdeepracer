@@ -54,7 +54,7 @@ class DeepRacerCamera_impl(object):
         self._imagestream_endpoints_lock = threading.RLock()
         
         # set BaxterImage struct
-        self._image = RR.RobotRaconteurNode.s.NewStructure("aws_interface.AWSImage")
+        self._image = RR.RobotRaconteurNode.s.NewStructure("AWSCamera_interface.AWSImage")
         self._image.width = 0
         self._image.height = 0
         self._image.step = 0
@@ -140,7 +140,7 @@ def main():
     print("registering services/pipes")
     obj = DeepRacerCamera_impl()
 
-    
+
     with RR.ServerNodeSetup("AWSCamera_interface.AWSCamera",7788):
         RR.RobotRaconteurNode.s.RegisterServiceType(service_def)
         RR.RobotRaconteurNode.s.RegisterService("AWSCamera","AWSCamera_interface.AWSCamera",obj)
