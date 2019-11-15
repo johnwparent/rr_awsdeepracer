@@ -139,6 +139,8 @@ def main():
 
     print("registering services/pipes")
     obj = DeepRacerCamera_impl()
+
+    
     with RR.ServerNodeSetup("AWSCamera_interface.AWSCamera",7788):
         RR.RobotRaconteurNode.s.RegisterServiceType(service_def)
         RR.RobotRaconteurNode.s.RegisterService("AWSCamera","AWSCamera_interface.AWSCamera",obj)
