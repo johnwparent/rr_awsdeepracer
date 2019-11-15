@@ -9,12 +9,38 @@ import time
 import sys
 import RobotRaconteur as RR
 import thread 
+import threading
 import numpy
 import traceback
 import cv2
+service_def = """
+service AWSCamera_interface
+option version 0.9
+struct AWSImage
+    field int32 width
+    field int32 height
+    field int32 step
+    field uint8 is_bigendian
+    field string encoding
+    field uint8[] data
+end struct
+
+object AWSCamera
+    # camera control functions
+    function void startCamera()
+    
+    # functions to acquire data on the image
+    function AWSImage getCurrentImage()
+    
+    # pipe to stream images through
+    pipe AWSImage ImageStream
+    
+end
+"""
+
 
 class DeepRacerCamera_impl(object):
-    def __init__(self, camera_name, mode, half_res):
+    def __init__(self):
         print ("Initializing cam Node")
         rospy.init_node('aws_cams', anonymous = True)
         
@@ -36,7 +62,7 @@ class DeepRacerCamera_impl(object):
     # open camera 
     def startCamera(self):
         
-        print ("Subscribing to", self._camera_name)
+        print ("Subscribing to AWSCamera")
         # get camera intrinsic values and fill Robot Raconteur struct
         self._caminfo_sub = rospy.Subscriber("/video_mjpeg", 
                                 Image, self.setImageData)
@@ -113,8 +139,8 @@ def main():
 
     print("registering services/pipes")
     obj = DeepRacerCamera_impl()
-    with RR.ServerNodeSetup("AWSCamera_interface.AWSCamera",7788)
-        RR.RobotRaconteurNode.s.RegisterServiceTypeFromFile("AWSCamera")
+    with RR.ServerNodeSetup("AWSCamera_interface.AWSCamera",7788):
+        RR.RobotRaconteurNode.s.RegisterServiceType(service_def)
         RR.RobotRaconteurNode.s.RegisterService("AWSCamera","AWSCamera_interface.AWSCamera",obj)
 
         print("Service initiated")

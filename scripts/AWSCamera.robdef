@@ -1,5 +1,5 @@
 service AWSCamera_interface
-option version 0.4
+option version 0.9
 struct AWSImage
     field int32 width
     field int32 height
