@@ -16,7 +16,7 @@ from std_msgs.msg import Header
 from std_msgs.msg import String
 service_def ="""
 service servo
-option version 0.9
+stdver 0.9
 object Servo
     property double servo_velocity
     property double serv_torque

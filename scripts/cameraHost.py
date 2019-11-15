@@ -15,7 +15,8 @@ import traceback
 import cv2
 service_def = """
 service AWSCamera_interface
-option version 0.9
+stdver 0.9
+
 struct AWSImage
     field int32 width
     field int32 height
@@ -23,7 +24,7 @@ struct AWSImage
     field uint8 is_bigendian
     field string encoding
     field uint8[] data
-end struct
+end
 
 object AWSCamera
     # camera control functions
@@ -53,12 +54,13 @@ class DeepRacerCamera_impl(object):
         self._imagestream_endpoints = dict()
         self._imagestream_endpoints_lock = threading.RLock()
         
-        # set BaxterImage struct
+       
+    def set_image_struct(self):
+        # set aws struct
         self._image = RR.RobotRaconteurNode.s.NewStructure("AWSCamera_interface.AWSImage")
         self._image.width = 0
         self._image.height = 0
         self._image.step = 0
-        
     # open camera 
     def startCamera(self):
         
@@ -144,7 +146,7 @@ def main():
     with RR.ServerNodeSetup("AWSCamera_interface.AWSCamera",7788):
         RR.RobotRaconteurNode.s.RegisterServiceType(service_def)
         RR.RobotRaconteurNode.s.RegisterService("AWSCamera","AWSCamera_interface.AWSCamera",obj)
-
+        obj.set_image_struct()
         print("Service initiated")
 
         raw_input("Press enter to quit ...\r\n")
