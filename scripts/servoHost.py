@@ -33,7 +33,7 @@ end
 class RR_servo_impl(object):
     def __init__(self):
         print ("Initializing Node")
-        self._pub = rospy.Publisher('/manual_drive',ServoCtrlMsg)
+        self._pub = rospy.Publisher('/manual_drive',ServoCtrlMsg,queue_size=50)
         rospy.init_node('rr_servo_host')   
 
 
@@ -44,7 +44,7 @@ class RR_servo_impl(object):
         self._senderStop.throttle = 0.0
         self._senderGo = ServoCtrlMsg()
         self._senderGo.angle = 0.0
-        self._senderGo.throttle = 0.1
+        self._senderGo.throttle = 0.3
 
 
     @property
@@ -84,7 +84,8 @@ class RR_servo_impl(object):
         msg.angle = 0.0
         msg.throttle = self._throttle
         self._pub.publish(msg)
-
+    def testing(self):
+        rospy.loginfo("The rr servo service can communicate!!!")
 
 def main():
     obj = RR_servo_impl()
@@ -93,6 +94,7 @@ def main():
         RRN.RegisterService("Servo","servo.Servo",obj)
         print(RRN.GetRegisteredServiceTypes())
         print(RRN.IsServiceTypeRegistered('servo'))
+        
         raw_input("Server_started,_press_enter_to_quit...")
 
         obj.Close()
