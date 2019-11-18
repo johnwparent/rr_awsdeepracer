@@ -26,6 +26,7 @@ object Servo
     function void Go()
     function void Drive(double speed, double turn)
     function void stopTurn()
+    function void testing()
 end
 """
 
