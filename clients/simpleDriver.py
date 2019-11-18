@@ -15,6 +15,7 @@ if __name__ == '__main__':
     print(RRN.GetRegisteredServiceTypes())
     print(RRN.IsServiceTypeRegistered('servo'))
     servo_ctrl = RRN.ConnectService(url)
+    servo_ctrl.testing()
     servo_ctrl.Go()
     servo_ctrl.Drive(0.5,0)
     time.sleep(1)
