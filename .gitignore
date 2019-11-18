@@ -126,5 +126,3 @@ dmypy.json
 # VSCode extensions
 .vscode/
 
-#ignore RR clients for catkin package purposes
-/clients/*
