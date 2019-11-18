@@ -91,7 +91,7 @@ def main():
     with RR.ServerNodeSetup("servo.Servo",2340):
         RRN.RegisterServiceType(service_def)
         RRN.RegisterService("Servo","servo.Servo",obj)
-
+        print(RRN.IsServiceTypeRegistered("Servo"))
         raw_input("Server_started,_press_enter_to_quit...")
 
         obj.Close()
