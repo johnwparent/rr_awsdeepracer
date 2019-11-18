@@ -88,7 +88,7 @@ class RR_servo_impl(object):
 
 def main():
     obj = RR_servo_impl()
-    with RR.ServerNodeSetup("servo",2340):
+    with RR.ServerNodeSetup("servo.Servo",2340):
         RRN.RegisterServiceType(service_def)
         RRN.RegisterService("Servo","servo.Servo",obj)
 
