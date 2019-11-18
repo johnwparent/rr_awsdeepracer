@@ -9,13 +9,14 @@ import threading
 
 
 if __name__ == '__main__':
-    url = 'rr+tcp://'+sys.argv[1]+':'+sys.argv[2]+'?service=servo'
+    url = 'rr+tcp://localhost:'+sys.argv[1]+'?service=Servo'
     print(url)
     print()
     print(RRN.GetRegisteredServiceTypes())
     print(RRN.IsServiceTypeRegistered('servo'))
     servo_ctrl = RRN.ConnectService(url)
     servo_ctrl.Go()
+    servo_ctrl.Drive(0.5,0)
     time.sleep(1)
     servo_ctrl.Stop()
     
