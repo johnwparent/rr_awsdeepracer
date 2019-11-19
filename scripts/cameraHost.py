@@ -137,20 +137,20 @@ class DeepRacerCamera_impl(object):
 def main():
     RR.RobotRaconteurNode.s.UseNumPy = True
 
-    RR.RobotRaconteurNode.s.NodeName = "AWSCamService"
+    #RR.RobotRaconteurNode.s.NodeName = "AWSCamService"
+    with RR.ServerNodeSetup("AWSCamera_interface.AWSCamera",2240):
+        print("registering services/pipes")
+        obj = DeepRacerCamera_impl()
 
-    print("registering services/pipes")
-    obj = DeepRacerCamera_impl()
 
+        RR.RobotRaconteurNode.s.RegisterServiceType(service_def)
+        RR.RobotRaconteurNode.s.RegisterService("AWSCamera","AWSCamera_interface.AWSCamera",obj)
+        obj.set_image_struct()
+        print("Service initiated")
 
-    RR.RobotRaconteurNode.s.RegisterServiceType(service_def)
-    RR.RobotRaconteurNode.s.RegisterService("AWSCamera","AWSCamera_interface.AWSCamera",obj)
-    obj.set_image_struct()
-    print("Service initiated")
+        raw_input("Press enter to quit ...\r\n")
 
-    raw_input("Press enter to quit ...\r\n")
-
-    #RR.RobotRaconteurNode.s.Shutdown()
+        #RR.RobotRaconteurNode.s.Shutdown()
 
 if __name__ == '__main__':
     main()
