@@ -47,7 +47,7 @@ class CameraCalibration(object):
         for x in range(15):
             #take image from RR
             print("deepracer capture #%i",x)
-            input("Press enter for DeepRacer capture)
+            input("Press enter for DeepRacer capture")
             #get rr image here
             #send for proccessing
             #todo: thread cause timing
