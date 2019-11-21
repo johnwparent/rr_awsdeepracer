@@ -21,10 +21,9 @@ if __name__ == '__main__':
     cv2.imshow(" ",im2)
     cv2.waitKey()
     cv2.destroyAllWindows()
-    image1 = cc.reformat(cam_ctrl.getCurrentImage())
-    image2 = cc.reformat(cam_ctrl.getCurrentImage())
-    cv2.imshow("1st test",image1)
-    cv2.imshow("2nd test",image2)
+    
+    cc.cal_main(cam_ctrl)
+
 
     cv2.waitKey()
     cv2.destroyAllWindows()

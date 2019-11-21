@@ -40,16 +40,8 @@ class CameraCalibration(object):
     def undistort(self, obj,img):
         return cv2.undistort(img,obj.mtx,obj.dist,None,obj.mtx)
 
-    def cal_main(self,argv):
+    def cal_main(self,cam):
 
-        #connect to the webcam service
-        url = 'rr+tcp://'+argv[0]+':'+argv[1]+'/?service=AWSCamera'
-        
-        try:
-            cam = RRN.ConnectService(url)
-        except RRN.ConnectionException as RRE:
-            print("Cant find service or something: error: %e",RRE)
-            return 1
         
 
         for x in range(15):
