@@ -19,8 +19,8 @@ if __name__ == '__main__':
     im2 = cc.reformat(cam_ctrl.getCurrentImage())
     cv2.imshow(" ",im)
     cv2.imshow(" ",im2)
-    cv2.waitKey()
-    cv2.destroyAllWindows()
+    # cv2.waitKey()
+    # cv2.destroyAllWindows()
     
     cc.cal_main(cam_ctrl)
 
