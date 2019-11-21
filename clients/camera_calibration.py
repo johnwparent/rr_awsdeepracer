@@ -46,7 +46,7 @@ class CameraCalibration(object):
 
         for x in range(15):
             #take image from RR
-            print("deepracer capture #"+x)
+            print("deepracer capture #"+(str)x)
             fd = input("Press enter for DeepRacer capture")
             #get rr image here
             #send for proccessing
