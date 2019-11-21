@@ -18,7 +18,7 @@ if __name__ == '__main__':
     raw_input("Press_enter_to_capture_image: ")
     im2 = cc.reformat(cam_ctrl.getCurrentImage())
     cv2.imshow(" ",im)
-    cv2.imshowd(" ",im2)
+    cv2.imshow(" ",im2)
     cv2.waitKey()
     cv2.destroyAllWindows()
     image1 = cc.reformat(cam_ctrl.getCurrentImage())

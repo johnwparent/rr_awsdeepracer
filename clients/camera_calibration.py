@@ -1,3 +1,8 @@
+
+
+
+
+
 from RobotRaconteur.Client import *
 import time
 import numpy as np
@@ -14,7 +19,8 @@ class CameraCalibration(object):
         self._imagepoints = []
         self._taskspacepoints = []
         self._objp = np.zeros((6*8,3), np.float32)
-        self._objp[:,] =  np.mgrid[0:8,0:6].T.reshape(-1,2)
+	self._objp[:,:2]  =  np.mgrid[0:8,0:6].T.reshape(-1,2)
+
     def calibrate(self,img):
         self.ret,self.mtx,self.dist,self.rvecs,self.tvecs = cv2.calibrateCamera(self._taskspacepoints,self._imagepoints,img.shape[::-1],None,None)
         cali = calibrationObj.calibrate_data()
