@@ -17,12 +17,12 @@ if __name__ == '__main__':
     im = cam_ctrl.getCurrentImage()
     raw_input("Press_enter_to_capture_image: ")
     im2 = cam_ctrl.getCurrentImage()
-    cv2.imshow(" ",im)
-    cv2.imshow(" ",im2)
+    cv2.imshow(" ",im.data)
+    cv2.imshow(" ",im2.data)
     # cv2.waitKey()
     # cv2.destroyAllWindows()
     
-    cc.cal_main(cam_ctrl)
+    #cc.cal_main(cam_ctrl)
 
 
     cv2.waitKey()
