@@ -40,9 +40,11 @@ class CameraCalibration(object):
     def undistort(self, obj,img):
         return cv2.undistort(img,obj.mtx,obj.dist,None,obj.mtx)
 
-    def cal_main(self,cam):
-
-        
+    def cal_main(self,port):
+        #connect to rr
+        url = 'rr+tcp://localhost:'+port+'?service=AWSCamera'
+        print(url)
+        cam_ctrl = RRN.ConnectService(url)
 
         for x in range(15):
             #take image from RR
