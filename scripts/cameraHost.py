@@ -41,6 +41,12 @@ end
 
 
 class DeepRacerCamera_impl(object):
+    """Amazon AWS Deepracer Service Object for `Robot Raconteur`_.
+    .. _`Robot Raconteur`: http://robotraconteur.com
+
+    
+
+    """
     def __init__(self):
         print ("Initializing cam Node")
         rospy.init_node('aws_cams', anonymous = True)

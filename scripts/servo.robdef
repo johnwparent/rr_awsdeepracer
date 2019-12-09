@@ -1,5 +1,10 @@
 service servo
 stdver 0.9
+struct tsData
+    field int32 dist
+    field int32 orientation_x
+    field int32 orientation_z
+
 object Servo
     property double servo_velocity
     property double serv_torque
@@ -9,4 +14,7 @@ object Servo
     function void Go()
     function void Drive(double speed, double turn)
     function void stopTurn()
+    function void testing()
+    function bool istf()
+    function tsData gettf()
 end

@@ -1,5 +1,6 @@
 service AWSCamera_interface
-option version 0.9
+stdver 0.9
+
 struct AWSImage
     field int32 width
     field int32 height
@@ -7,7 +8,7 @@ struct AWSImage
     field uint8 is_bigendian
     field string encoding
     field uint8[] data
-end struct
+end
 
 object AWSCamera
     # camera control functions
