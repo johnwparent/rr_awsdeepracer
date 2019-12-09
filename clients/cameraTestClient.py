@@ -17,17 +17,11 @@ if __name__ == '__main__':
     im = cam_ctrl.getCurrentImage()
     raw_input("Press_enter_to_capture_image: ")
     im2 = cam_ctrl.getCurrentImage()
-    cv2.imshow(" ",im.data)
-    cv2.imshow(" ",im2.data)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    cv2.imwrite("im1.png",im.data)
+    cv2.imwrite("im2.png",im2.data)
     raw_input("Press enter to capture lane image: ")
     im3 = cam_ctrl.getCurrentImage()
-    cv2.imwrite("lane_image.png",im3)
+    cv2.imwrite("lane_image.png",im3.data)
     #cc.cal_main(cam_ctrl)
-
-
-    cv2.waitKey()
-    cv2.destroyAllWindows()
     
    
