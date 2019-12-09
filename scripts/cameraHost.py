@@ -67,7 +67,7 @@ class DeepRacerCamera_impl(object):
         print ("Subscribing to AWSCamera: Rectified image")
         # get camera intrinsic values and fill Robot Raconteur struct
         self._caminfo_sub = rospy.Subscriber("/cv_camera/image_rect", 
-                                Image, self.setImageData)
+                                                Image, self.setImageData)
         # Suscriber to camera image
         
         self._camera_sub = True
@@ -134,6 +134,8 @@ class DeepRacerCamera_impl(object):
                 del(dict_ep[pipe_ep.Index])
             except:
                 return
+
+    
 def main():
     RR.RobotRaconteurNode.s.UseNumPy = True
 
