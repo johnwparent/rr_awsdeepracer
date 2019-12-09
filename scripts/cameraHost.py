@@ -82,8 +82,7 @@ class DeepRacerCamera_impl(object):
     # subscriber function for camera image
     def setImageData(self,camdata):
         with self._lock:
-            if camdata.data:
-                print("Got some camdata")
+            if camdata.data:                
                 self._image.data = numpy.frombuffer(camdata.data,dtype="u1")
                 self._image.height = camdata.height
                 self._image.width = camdata.width
@@ -106,7 +105,9 @@ class DeepRacerCamera_impl(object):
                         self.ImageStream_pipeclosed(pipe_ep)
     def getCurrentImage(self):
         with self._lock:
+            print(self._image.data)
             return self._image
+
             
     # pipe functions
     @property
