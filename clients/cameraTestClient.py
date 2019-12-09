@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 import sys
 import threading
+from cv_bridge import CvBridge, CvBridgeError
 from camera_calibration import CameraCalibration
 
 
@@ -13,15 +14,19 @@ if __name__ == '__main__':
     cam_ctrl = RRN.ConnectService(url)
     cam_ctrl.startCamera()
     cc = CameraCalibration()
+    bridge = CvBridge()
     raw_input("Press_enter_to_capture_image: ")
     im = cam_ctrl.getCurrentImage()
+    im = bridge.imgmsg_to_cv2(im, "bgr8")
     raw_input("Press_enter_to_capture_image: ")
     im2 = cam_ctrl.getCurrentImage()
-    cv2.imwrite("im1.png",im.data)
-    cv2.imwrite("im2.png",im2.data)
+    im2 = bridge.imgmsg_to_cv2(im2, "bgr8")
+    cv2.imwrite("im1.png",im)
+    cv2.imwrite("im2.png",im2)
     raw_input("Press enter to capture lane image: ")
     im3 = cam_ctrl.getCurrentImage()
-    cv2.imwrite("lane_image.png",im3.data)
+    im3 = bridge.imgmsg_to_cv2(im3, "bgr8")
+    cv2.imwrite("lane_image.png",im3)
     #cc.cal_main(cam_ctrl)
     
    
