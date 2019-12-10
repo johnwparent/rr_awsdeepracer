@@ -105,7 +105,6 @@ class DeepRacerCamera_impl(object):
                         self.ImageStream_pipeclosed(pipe_ep)
     def getCurrentImage(self):
         with self._lock:
-            print(self._image.data)
             return self._image
 
             

@@ -18,7 +18,7 @@ def display_lines(frame, lines, line_color=(0, 255, 0), line_width=2):
 
 
 if __name__ == '__main__':
-    frame = cv2.imread("lane_turn.png")
+    frame = cv2.imread("lane_1.png")
     edges, ret = lane_finder.iso_lines(frame)
     cv2.imwrite('testing.png',ret)
     cv2.imwrite('edges.png',edges)
