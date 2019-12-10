@@ -28,8 +28,6 @@ object Servo
     function void Drive(double speed, double turn)
     function void stopTurn()
     function void testing()
-    function bool istf()
-    function tsData gettf()
 end
 """
 
