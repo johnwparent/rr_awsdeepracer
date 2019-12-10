@@ -28,8 +28,8 @@ if __name__ == '__main__':
     cv2.imwrite("im2.png",im2_)
     raw_input("Press enter to capture lane image: ")
     im3 = cam_ctrl.getCurrentImage()
-    im3 = bridge.imgmsg_to_cv2(im3, "bgr8")
-    cv2.imwrite("lane_image.png",im3)
+    im3_ WebcamImageToMat(image)
+    cv2.imwrite("lane_image.png",im3_)
     #cc.cal_main(cam_ctrl)
     
    
