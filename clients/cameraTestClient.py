@@ -28,7 +28,7 @@ if __name__ == '__main__':
     cv2.imwrite("im2.png",im2_)
     raw_input("Press enter to capture lane image: ")
     im3 = cam_ctrl.getCurrentImage()
-    im3_ WebcamImageToMat(image)
+    im3_ = WebcamImageToMat(im3)
     cv2.imwrite("lane_image.png",im3_)
     #cc.cal_main(cam_ctrl)
     
