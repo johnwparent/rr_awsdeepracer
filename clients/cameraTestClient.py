@@ -16,8 +16,6 @@ if __name__ == '__main__':
     print(url)
     cam_ctrl = RRN.ConnectService(url)
     cam_ctrl.startCamera()
-    cc = CameraCalibration()
-    bridge = CvBridge()
     raw_input("Press_enter_to_capture_image: ")
     im = cam_ctrl.getCurrentImage()
     im_ = WebcamImageToMat(im)

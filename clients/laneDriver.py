@@ -5,7 +5,9 @@ import cv2
 import sys
 import threading
 import logging
+sys.path.append("..")
 import lane_finder
+
 
 global cam_calibration, calibrate
 
@@ -67,21 +69,44 @@ def stabilize_steering_angle(curr_steering_angle, new_steering_angle, num_of_lan
     return stabilized_steering_angle
 
 class LaneDrive(object):
-    def __init__(self):
-        a = 'TODO IMPLEMENT THIS'
+    def __init__(self,servo_ctrl):
+        self._speed = 0
+        self._turn = 0
+        self._obj = False
+        self._servo = servo_ctrl
+        self.c_drive_by_angle = 0.0
     def drive(self):
-        #todo implement this
-        self._none = None
+        if len(self._lane_lines) == 0:
+            logging.error('No lane lines detected, nothing to do.')
+            return
+
+        new_steering_angle = compute_steering_angle(self._frame, self._lane_lines)
+        self.c_drive_by_angle = stabilize_steering_angle(self.c_drive_by_angle, new_steering_angle, len(self._lane_lines))/33.33
+
+        self._servo.Drive(0.4,self.c_drive_by_angle)
 
 
+    def detect_lane(self,frame):
+        edges = lane_finder.iso_lines(frame)
+        roi = lane_finder.ROI(edges)
+        lines = lane_finder.find_lines(roi)
+        lane_lines = lane_finder.average_slope_intercept(frame,lines)
+        self._lane_lines = lane_lines
+        self._frame = frame
 
+global current_frame
+global driver
+def WebcamImageToMat(image):
+    frame2=image.data.reshape([image.height, image.width, 3], order='C')
+    return frame2
 def next_frame(pipe_ep):
-    global current_frame
-
+    
     while(pipe_ep.Avaliable >0):
         image =pipe_ep.RecievePacket()
-        
-        current_frame = image
+        current_frame = WebcamImageToMat(image)
+        driver.detect_lane(current_frame)
+        driver.drive()
+
 
 if __name__ == '__main__':
     
@@ -91,7 +116,8 @@ if __name__ == '__main__':
     url_camera = 'rr+tcp://'+sys.argv[0]+':'+sys.argv[1]+'/?service=AWSCamera'
     servo_ctrl = RRN.ConnectService(url_servo)
     cam_data = RRN.ConnectService(url_camera)
-
+    driver = LaneDrive(servo_ctrl)
+    
     
     #set up camera pipe stream
     p = cam_data.ImageStream.Connect(-1)
