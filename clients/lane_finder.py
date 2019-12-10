@@ -32,10 +32,10 @@ def ROI(frame):
 
     # only focus bottom half of the screen
     polygon = np.array([[
-        (0.39 * width, height * 1 / 2),
+        (0, height * 1 / 2),
         (width, height * 1 / 2),
         (width, height),
-        (0.39*width, height),
+        (0, height),
     ]], np.int32)
 
     cv2.fillPoly(mask, polygon, 255)
