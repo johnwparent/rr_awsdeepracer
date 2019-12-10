@@ -17,10 +17,6 @@ from std_msgs.msg import String
 service_def ="""
 service servo
 stdver 0.9
-struct tsData
-    field int32 dist
-    field int32 orientation_x
-    field int32 orientation_z
 
 object Servo
     property double servo_velocity
