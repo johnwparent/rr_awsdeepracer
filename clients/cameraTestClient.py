@@ -7,6 +7,9 @@ import threading
 from cv_bridge import CvBridge, CvBridgeError
 from camera_calibration import CameraCalibration
 
+def WebcamImageToMat(image):
+    frame2=image.data.reshape([image.height, image.width, 3], order='C')
+    return frame2
 
 if __name__ == '__main__':
     url = 'rr+tcp://localhost:'+sys.argv[1]+'?service=AWSCamera'
@@ -17,12 +20,12 @@ if __name__ == '__main__':
     bridge = CvBridge()
     raw_input("Press_enter_to_capture_image: ")
     im = cam_ctrl.getCurrentImage()
-    im = bridge.imgmsg_to_cv2(im.data, "bgr8")
+    im_ = WebcamImageToMat(im)
     raw_input("Press_enter_to_capture_image: ")
     im2 = cam_ctrl.getCurrentImage()
-    im2 = bridge.imgmsg_to_cv2(im2.data, "bgr8")
-    cv2.imwrite("im1.png",im)
-    cv2.imwrite("im2.png",im2)
+    im2_ = WebcamImageToMat(im2)
+    cv2.imwrite("im1.png",im_)
+    cv2.imwrite("im2.png",im2_)
     raw_input("Press enter to capture lane image: ")
     im3 = cam_ctrl.getCurrentImage()
     im3 = bridge.imgmsg_to_cv2(im3, "bgr8")
