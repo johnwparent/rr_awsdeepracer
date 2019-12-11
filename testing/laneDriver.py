@@ -3,7 +3,6 @@ import time
 import numpy as np
 import cv2
 import sys
-import math
 import threading
 import logging
 sys.path.append("..")
@@ -83,12 +82,12 @@ class LaneDrive(object):
 
         new_steering_angle = compute_steering_angle(self._frame, self._lane_lines)
         self.c_drive_by_angle = stabilize_steering_angle(self.c_drive_by_angle, new_steering_angle, len(self._lane_lines))/33.33
-        print(self.c_drive_by_angle)
-        self._servo.Drive(0.65,self.c_drive_by_angle)
+
+        self._servo.Drive(0.4,self.c_drive_by_angle)
 
 
     def detect_lane(self,frame):
-        edges,frame_final = lane_finder.iso_lines(frame)
+        edges = lane_finder.iso_lines(frame)
         roi = lane_finder.ROI(edges)
         lines = lane_finder.find_lines(roi)
         lane_lines = lane_finder.average_slope_intercept(frame,lines)
