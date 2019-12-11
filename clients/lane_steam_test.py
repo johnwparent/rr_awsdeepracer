@@ -35,7 +35,7 @@ if __name__ == '__main__':
     driver = laneDriver.LaneDrive(servo_ctrl)
     cam_data.startCamera()
     p=cam_data.ImageStream.Connect(-1)
-    p.PacketRecievedEvent+=next_frame
+    p.PacketReceivedEvent+=next_frame
     raw_input("Press Enter to begin: ")
     
     raw_input("Press Enter to end:")
