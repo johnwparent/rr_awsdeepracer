@@ -4,7 +4,7 @@ import cv2
 import sys
 import threading
 import logging
-
+import math
 
 def iso_lines(frame):
     hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
