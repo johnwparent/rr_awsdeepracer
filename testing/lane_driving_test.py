@@ -9,6 +9,17 @@ sys.path.append("..")
 from clients import lane_finder
 from clients import laneDriver
 
+def nd_arr_transform(ros_frame):
+    _shape = (ros_frame.height,ros_frame.width,3)
+    _dtype = np.uint8
+    _buffer = ros_frame.data
+    _offset = ros_frame.step
+    _order = 'C'
+    return np.ndarray(_shape,_dtype,_buffer,_offset,order=_order)
+    
+
+
+
 if __name__ == '__main__':
 
     url_servo = 'rr+tcp://localhost:'+sys.argv[1]+'/?service=Servo'
@@ -18,7 +29,7 @@ if __name__ == '__main__':
     driver = laneDriver.LaneDrive(servo_ctrl)
     raw_input("Press Enter to begin: ")
     im = cam_data.getCurrentImage()
-    im_ = laneDriver.WebcamImageToMat(im)
+    im_ = nd_arr_transform(im)
     driver.detect_lane(im_)
     driver.drive()
     servo_ctrl.Stop()
