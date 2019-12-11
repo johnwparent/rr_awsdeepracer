@@ -34,7 +34,7 @@ if __name__ == '__main__':
     cam_data = RRN.ConnectService(url_camera)
     driver = laneDriver.LaneDrive(servo_ctrl)
     cam_data.startCamera()
-    p=cam_data.FrameStream.Connect(-1)
+    p=cam_data.ImageStream.Connect(-1)
     p.PacketRecievedEvent+=next_frame
     raw_input("Press Enter to begin: ")
     
