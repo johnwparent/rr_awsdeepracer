@@ -15,7 +15,7 @@ def nd_arr_transform(ros_frame):
     _buffer = ros_frame.data
     _offset = ros_frame.step
     _order = 'C'
-    return np.ndarray(_shape,_dtype,_buffer,_offset,order=_order)
+    return np.ndarray(_shape,_dtype,_buffer,order=_order)
     
 
 
