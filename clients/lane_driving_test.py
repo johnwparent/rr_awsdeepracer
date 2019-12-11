@@ -27,6 +27,7 @@ if __name__ == '__main__':
     servo_ctrl = RRN.ConnectService(url_servo)
     cam_data = RRN.ConnectService(url_camera)
     driver = laneDriver.LaneDrive(servo_ctrl)
+    cam_data.startCamera()
     raw_input("Press Enter to begin: ")
     im = cam_data.getCurrentImage()
     im_ = nd_arr_transform(im)
