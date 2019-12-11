@@ -33,4 +33,5 @@ if __name__ == '__main__':
     im_ = nd_arr_transform(im)
     driver.detect_lane(im_)
     driver.drive()
+    time.sleep(3)
     servo_ctrl.Stop()
