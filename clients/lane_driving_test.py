@@ -6,8 +6,8 @@ import sys
 import threading
 import logging
 sys.path.append("..")
-from clients import lane_finder
-from clients import laneDriver
+import lane_finder
+import laneDriver
 
 def nd_arr_transform(ros_frame):
     _shape = (ros_frame.height,ros_frame.width,3)
