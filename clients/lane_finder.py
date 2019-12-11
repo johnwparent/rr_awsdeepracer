@@ -24,6 +24,8 @@ def iso_lines(frame):
     final_image = cv2.bitwise_and(gray,yw_mask)
     final_image_=cv2.GaussianBlur(final_image,(5,5),0)
     canny_edge = cv2.Canny(final_image_,200,600)
+    cv2.imwrite("canny.png",canny_edge)
+    cv2.imwrite("final_image.png",final_image)
     return canny_edge,final_image
 
 def ROI(frame):

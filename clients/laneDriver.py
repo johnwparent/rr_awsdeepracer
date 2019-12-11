@@ -87,7 +87,7 @@ class LaneDrive(object):
 
 
     def detect_lane(self,frame):
-        edges = lane_finder.iso_lines(frame)
+        edges,frame_final = lane_finder.iso_lines(frame)
         roi = lane_finder.ROI(edges)
         lines = lane_finder.find_lines(roi)
         lane_lines = lane_finder.average_slope_intercept(frame,lines)
