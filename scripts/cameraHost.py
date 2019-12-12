@@ -89,6 +89,7 @@ class DeepRacerCamera_impl(object):
                 self._image.encoding = camdata.encoding
                 self._image.is_bigendian = camdata.is_bigendian
                 self._imagestream_broadcaster.SendPacket(self._image)
+                print("package_sent")
         
     def getCurrentImage(self):
         with self._lock:
@@ -105,7 +106,7 @@ class DeepRacerCamera_impl(object):
         self._imagestream = value
         # Set the PipeConnecCallback to ImageStream_pipeconnect that will
         # called when a PipeEndpoint connects
-        self._imagestream_broadcaster=RR.PipeBroadcaster(value,10)
+        self._imagestream_broadcaster=RR.PipeBroadcaster(value,3)
     
 
     
