@@ -1,9 +1,11 @@
+from RobotRaconteur.Client import *
 import time
 import numpy as np
 import cv2
 import sys
-sys.path.append('..')
 import threading
+import logging
+sys.path.append('..')
 
 def main(frame):
     vid_im = nd_arr_transform(frame)
