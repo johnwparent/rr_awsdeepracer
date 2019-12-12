@@ -30,6 +30,11 @@ if __name__ == '__main__':
     global out 
     out = cv2.VideoWriter('lane.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
     raw_input("Press_enter_to_start_video: ")
+    start = time.time()
     while(True):
         im =cam_ctrl.getCurrentImage() 
         main(im)
+        finish = time.time()
+        if(finish - start)>90:
+            break
+    out.release()
