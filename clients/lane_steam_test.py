@@ -20,7 +20,7 @@ def nd_arr_transform(ros_frame):
 
 def next_frame(pipe_ep):
     
-    while(pipe_ep.Avaliable >0):
+    while(pipe_ep.Avaliable > 0):
         print("recieved frame")
         image =pipe_ep.RecievePacket()
         current_frame = nd_arr_transform(image)
