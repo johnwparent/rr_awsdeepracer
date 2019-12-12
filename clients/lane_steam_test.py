@@ -19,8 +19,9 @@ def nd_arr_transform(ros_frame):
     
 
 def next_frame(pipe_ep):
-    print("recieved frame")
+    
     while(pipe_ep.Avaliable >0):
+        print("recieved frame")
         image =pipe_ep.RecievePacket()
         current_frame = nd_arr_transform(image)
         driver.detect_lane(current_frame)
