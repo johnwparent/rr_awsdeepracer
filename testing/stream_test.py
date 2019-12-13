@@ -19,6 +19,7 @@ if __name__ == '__main__':
     url_camera = 'rr+tcp://localhost:'+sys.argv[1]+'/?service=AWSCamera'
     cam_data = RRN.ConnectService(url_camera)
     p=cam_data.ImageStream.Connect(-1)
+    print(p)
     p.PacketReceivedEvent+=next_frame
     raw_input("press enter to begin: ")
     cam_data.startCamera()
