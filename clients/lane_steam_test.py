@@ -5,6 +5,7 @@ import cv2
 import sys
 import threading
 import logging
+import keyboard
 sys.path.append("..")
 import lane_finder
 import laneDriver
@@ -16,16 +17,12 @@ def nd_arr_transform(ros_frame):
     _offset = ros_frame.step
     _order = 'C'
     return np.ndarray(_shape,_dtype,_buffer,order=_order)
-    
 
-def next_frame(pipe_ep):
+def image_stream(cam_data):
+    im=cam_data.getCurrentImage()
+    im_ = nd_arr_transform(im)
+    return im_
     
-    while(pipe_ep.Avaliable > 0):
-        print("recieved frame")
-        image =pipe_ep.RecievePacket()
-        current_frame = nd_arr_transform(image)
-        driver.detect_lane(current_frame)
-        driver.drive()
 
 if __name__ == '__main__':
 
@@ -34,9 +31,17 @@ if __name__ == '__main__':
     servo_ctrl = RRN.ConnectService(url_servo)
     cam_data = RRN.ConnectService(url_camera)
     driver = laneDriver.LaneDrive(servo_ctrl)
+    raw_input("press enter to begin: ")
     cam_data.startCamera()
-    p=cam_data.ImageStream.Connect(-1)
-    p.PacketReceivedEvent+=next_frame
-    raw_input("Press Enter to begin: ")
+    while True:
+        frame = image_stream(cam_data)
+        driver.detect_lane(frame)
+        driver.drive()
+        try:
+            if keyboard.is_pressed('space'):
+                servo_ctrl.Stop()
+                time.sleep(0.2)
+                break
+        except:
+            continue
     
-    raw_input("Press Enter to end:")

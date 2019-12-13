@@ -6,7 +6,7 @@ import math
 import threading
 import logging
 #######################REMOVE THE CLIENT IMPORT ##################
-import lane_finder
+from clients import lane_finder
 
 
 global cam_calibration, calibrate
@@ -17,7 +17,7 @@ def compute_steering_angle(frame, lane_lines):
     """
     if len(lane_lines) == 0:
         logging.info('No lane lines detected, do nothing')
-        return -90
+        return 0
 
     height, width, _ = frame.shape
     if len(lane_lines) == 1:
@@ -36,7 +36,7 @@ def compute_steering_angle(frame, lane_lines):
 
     angle_to_mid_radian = math.atan(x_offset / y_offset)  # angle (in radian) to center vertical line
     angle_to_mid_deg = int(angle_to_mid_radian * 180.0 / math.pi)  # angle (in degrees) to center vertical line
-    steering_angle = angle_to_mid_deg + 90  # this is the steering angle needed by picar front wheel
+    steering_angle = angle_to_mid_deg  # this is the steering angle needed by picar front wheel
 
     logging.debug('new steering angle: %s' % steering_angle)
     return steering_angle
@@ -81,9 +81,12 @@ class LaneDrive(object):
             return
 
         new_steering_angle = compute_steering_angle(self._frame, self._lane_lines)
-        self.c_drive_by_angle = stabilize_steering_angle(self.c_drive_by_angle, new_steering_angle, len(self._lane_lines))/33.33
+        drive_by_angle = stabilize_steering_angle(self.c_drive_by_angle, new_steering_angle, len(self._lane_lines))/33.33
+        self.c_drive_by_angle = drive_by_angle
         if self._servo is not None:
+
             self._servo.Drive(0.65,self.c_drive_by_angle)
+            self._servo.Drive(0.3,self.c_drive_by_angle)
         
 
 
@@ -100,17 +103,6 @@ class LaneDrive(object):
     @property
     def frame(self):
         return self._frame
-global current_frame
-global driver
-def WebcamImageToMat(image):
-    frame2=image.data.reshape([image.height, image.width, 3], order='C')
-    return frame2
-def next_frame(pipe_ep):
-    
-    while(pipe_ep.Avaliable >0):
-        image =pipe_ep.RecievePacket()
-        current_frame = WebcamImageToMat(image)
-        driver.detect_lane(current_frame)
-        driver.drive()
+
 
 

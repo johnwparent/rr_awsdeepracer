@@ -9,7 +9,6 @@ import math
 def iso_lines(frame):
     hsv = cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    cv2.imwrite("hsv.png",hsv)
     ly = np.array([20,100,100],dtype=np.uint8)
     uy = np.array([30,255,255],dtype=np.uint8)
     lw = np.array([0,0,230],dtype=np.uint8)
@@ -18,14 +17,9 @@ def iso_lines(frame):
     #w_mask = cv2.inRange(hsv,lw,uw)
     y_mask = cv2.inRange(hsv,ly,uy)
     yw_mask = cv2.bitwise_or(w_mask,y_mask)
-    cv2.imwrite("y mask.png",y_mask)
-    cv2.imwrite("w mask.png", w_mask)
-    cv2.imwrite("yw_mask.png",yw_mask)
     final_image = cv2.bitwise_and(gray,yw_mask)
     final_image_=cv2.GaussianBlur(final_image,(5,5),0)
     canny_edge = cv2.Canny(final_image_,200,600)
-    cv2.imwrite("canny.png",canny_edge)
-    cv2.imwrite("final_image.png",final_image)
     return canny_edge,final_image
 
 def ROI(frame):
@@ -42,7 +36,6 @@ def ROI(frame):
 
     cv2.fillPoly(mask, polygon, 255)
     roi = cv2.bitwise_and(frame, mask)
-    cv2.imwrite("roi.png", roi)
     return roi
 
 def find_lines(frame):
@@ -81,6 +74,8 @@ def average_slope_intercept(frame, line_segments):
             fit = np.polyfit((x1, x2), (y1, y2), 1)
             slope = fit[0]
             intercept = fit[1]
+            if abs(slope)<0.33:
+                continue
             if slope < 0:
                 if x1 < left_region_boundary and x2 < left_region_boundary:
                     left_fit.append((slope, intercept))
