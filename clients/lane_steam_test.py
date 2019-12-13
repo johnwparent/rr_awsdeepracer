@@ -44,6 +44,7 @@ if __name__ == '__main__':
     driver = laneDriver.LaneDrive(servo_ctrl)
     raw_input("press enter to begin: ")
     cam_data.startCamera()
+    time.sleep(0.3)
     im = cam_data.getCurrentImage()
     frame_width = im.width
     frame_height = im.height
