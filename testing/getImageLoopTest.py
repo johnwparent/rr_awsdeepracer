@@ -23,11 +23,11 @@ if __name__ == '__main__':
     cam_data = RRN.ConnectService(url_camera)
     raw_input("press enter to begin: ")
     cam_data.startCamera()
-    while True:
-        im=cam_data.getCurrentImage()
-        im_ = nd_arr_transform(im)
-        cv2.imshow("Image Stream",im_)
-        if cv2.waitKey(50)!=-1:
-            break
-    cv2.destroyAllWindows()
-    
+    for i in range(6):
+        counter = 0
+        t_end = time.time() + 60 * 15
+        while time.time() < t_end:
+            im=cam_data.getCurrentImage()
+            im_ = nd_arr_transform(im)
+            counter+=1
+        print("FPS: %i" % counter)
