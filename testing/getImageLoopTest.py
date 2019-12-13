@@ -25,7 +25,7 @@ if __name__ == '__main__':
     cam_data.startCamera()
     for i in range(6):
         counter = 0
-        t_end = time.time() + 60 * 15
+        t_end = time.time() + 10
         while time.time() < t_end:
             im=cam_data.getCurrentImage()
             im_ = nd_arr_transform(im)
