@@ -16,7 +16,11 @@ def nd_arr_transform(ros_frame):
     _order = 'C'
     return np.ndarray(_shape,_dtype,_buffer,order=_order)
 
-
+def next_frame(pipe_ep):
+    global current_frame
+    while(pipe_ep.Available > 0):
+        image = pipe_ep.RecievePacket()
+        current_frame = nd_arr_transform(image)
     
 current_frame = None
 
@@ -36,9 +40,5 @@ if __name__ == '__main__':
     cv2.destroyAllWindows()
     p.Close()
 
-def next_frame(pipe_ep):
-    global current_frame
-    while(pipe_ep.Available > 0):
-        image = pipe_ep.RecievePacket()
-        current_frame = nd_arr_transform(image)
+
     
