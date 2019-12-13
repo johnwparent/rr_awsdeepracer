@@ -23,6 +23,17 @@ def image_stream(cam_data):
     im_ = nd_arr_transform(im)
     return im_
     
+def display_lines(frame, lines, line_color=(0, 255, 0), line_width=2):
+    line_image = np.zeros_like(frame)
+    if lines is not None:
+        for line in lines:
+            for x1, y1, x2, y2 in line:
+                cv2.line(line_image, (x1, y1), (x2, y2), line_color, line_width)
+    line_image = cv2.addWeighted(frame, 0.8, line_image, 1, 1)
+    return line_image
+def main(frame):
+    vid_im = nd_arr_transform(frame)
+    out.write(vid_im)
 
 if __name__ == '__main__':
 
@@ -33,15 +44,24 @@ if __name__ == '__main__':
     driver = laneDriver.LaneDrive(servo_ctrl)
     raw_input("press enter to begin: ")
     cam_data.startCamera()
+    im = cam_data.getCurrentImage()
+    frame_width = im.width
+    frame_height = im.height
+    global out
+    out = cv2.VideoWriter('lane_real.avi',cv2.VideoWriter_fourcc(*'XVID'), 10, (frame_width,frame_height))
     while True:
         frame = image_stream(cam_data)
         driver.detect_lane(frame)
         driver.drive()
+        lane_lines = driver.lane_lines
+        lane_line_image = display_lines(frame,lane_lines)
+        main(lane_line_image)
         try:
             if keyboard.is_pressed('space'):
                 servo_ctrl.Stop()
-                time.sleep(0.2)
                 break
         except:
             continue
+    
+    out.release()
     

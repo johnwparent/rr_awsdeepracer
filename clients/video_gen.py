@@ -30,7 +30,7 @@ if __name__ == '__main__':
     frame_width = im.width
     frame_height = im.height
     global out 
-    out = cv2.VideoWriter('lane.avi',cv2.VideoWriter_fourcc('D','V','I','X'), 10, (frame_width,frame_height))
+    out = cv2.VideoWriter('lane.avi',cv2.VideoWriter_fourcc(*'XVID'), 10, (frame_width,frame_height))
     raw_input("Press_enter_to_start_video: ")
     start = time.time()
     while(True):
