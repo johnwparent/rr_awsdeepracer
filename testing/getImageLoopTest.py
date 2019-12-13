@@ -30,4 +30,4 @@ if __name__ == '__main__':
             im=cam_data.getCurrentImage()
             im_ = nd_arr_transform(im)
             counter+=1
-        print("FPS: %i" % counter)
+        print("FPS: %i" % (counter//10))
