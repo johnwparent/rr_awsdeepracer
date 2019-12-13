@@ -36,7 +36,4 @@ if __name__ == '__main__':
     while(True):
         im =cam_ctrl.getCurrentImage() 
         main(im)
-        finish = time.time()
-        if(finish - start)>90:
-            break
     out.release()
