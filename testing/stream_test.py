@@ -10,7 +10,7 @@ import logging
 def next_frame(pipe_ep):
     while(pipe_ep.Available > 0):
         print("recieved frame")
-        image = pipe_ep.RecievePacketWait()
+        image = pipe_ep.RecievePacket()
         print(image.height)
     
 
