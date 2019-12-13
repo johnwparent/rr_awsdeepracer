@@ -56,7 +56,7 @@ if __name__ == '__main__':
         driver.drive()
         lane_lines = driver.lane_lines
         lane_line_image = display_lines(frame,lane_lines)
-        main(lane_line_image)
+        out.write(lane_line_image)
         try:
             if keyboard.is_pressed('space'):
                 servo_ctrl.Stop()
