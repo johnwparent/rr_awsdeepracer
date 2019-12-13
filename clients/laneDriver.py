@@ -41,9 +41,9 @@ def compute_steering_angle(frame, lane_lines):
     return steering_angle
 
 
-def length_of_line_segment(line):
-    x1, y1, x2, y2 = line
-    return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    def length_of_line_segment(line):
+        x1, y1, x2, y2 = line
+        return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
 def stabilize_steering_angle(curr_steering_angle, new_steering_angle, num_of_lane_lines, max_angle_deviation_two_lines=5, max_angle_deviation_one_lane=1):
     """

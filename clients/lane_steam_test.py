@@ -48,15 +48,15 @@ if __name__ == '__main__':
     im = cam_data.getCurrentImage()
     frame_width = im.width
     frame_height = im.height
-    global out
-    out = cv2.VideoWriter('lane_real.avi',cv2.VideoWriter_fourcc(*'XVID'), 10, (frame_width,frame_height))
+    #global out
+    #out = cv2.VideoWriter('lane_real.avi',cv2.VideoWriter_fourcc(*'XVID'), 10, (frame_width,frame_height))
     while True:
         frame = image_stream(cam_data)
         driver.detect_lane(frame)
         driver.drive()
-        lane_lines = driver.lane_lines
-        lane_line_image = display_lines(frame,lane_lines)
-        out.write(lane_line_image)
+        #lane_lines = driver.lane_lines
+        #lane_line_image = display_lines(frame,lane_lines)
+        #out.write(lane_line_image)
         try:
             if keyboard.is_pressed('space'):
                 servo_ctrl.Stop()
@@ -64,5 +64,5 @@ if __name__ == '__main__':
         except:
             continue
     
-    out.release()
+    #out.release()
     
