@@ -6,7 +6,7 @@ import sys
 sys.path.append('..')
 import threading
 import logging
-global current_frame
+
 
 def nd_arr_transform(ros_frame):
     _shape = (ros_frame.height,ros_frame.width,3)
@@ -25,6 +25,7 @@ def next_frame(pipe_ep):
 
 
 if __name__ == '__main__':
+    global current_frame
     url_camera = 'rr+tcp://localhost:'+sys.argv[1]+'/?service=AWSCamera'
     cam_data = RRN.ConnectService(url_camera)
     p=cam_data.ImageStream.Connect(-1)
