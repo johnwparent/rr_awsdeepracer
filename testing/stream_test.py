@@ -8,7 +8,7 @@ import threading
 import logging
 
 def next_frame(pipe_ep):
-    
+    print("frame_callback")
     while(pipe_ep.Avaliable > 0):
         print("recieved frame")
         image =pipe_ep.RecievePacket()
