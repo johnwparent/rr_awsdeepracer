@@ -85,8 +85,8 @@ class LaneDrive(object):
         self.c_drive_by_angle = drive_by_angle
         if self._servo is not None:
 
-            self._servo.Drive(0.65,self.c_drive_by_angle)
-            self._servo.Drive(0.3,self.c_drive_by_angle)
+            self._servo.Drive(0.8,self.c_drive_by_angle)
+            self._servo.Drive(0.45,self.c_drive_by_angle)
         
 
 
