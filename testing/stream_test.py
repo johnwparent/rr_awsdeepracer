@@ -6,12 +6,21 @@ import sys
 sys.path.append('..')
 import threading
 import logging
+global current_frame
+
+def nd_arr_transform(ros_frame):
+    _shape = (ros_frame.height,ros_frame.width,3)
+    _dtype = np.uint8
+    _buffer = ros_frame.data
+    _offset = ros_frame.step
+    _order = 'C'
+    return np.ndarray(_shape,_dtype,_buffer,order=_order)
 
 def next_frame(pipe_ep):
     while(pipe_ep.Available > 0):
-        print("recieved frame")
         image = pipe_ep.RecievePacket()
-        print(image)
+        current_frame = nd_arr_transform(image)
+    
     
 
 
@@ -19,11 +28,13 @@ if __name__ == '__main__':
     url_camera = 'rr+tcp://localhost:'+sys.argv[1]+'/?service=AWSCamera'
     cam_data = RRN.ConnectService(url_camera)
     p=cam_data.ImageStream.Connect(-1)
-    print(p)
     p.PacketReceivedEvent+=next_frame
     raw_input("press enter to begin: ")
     cam_data.startCamera()
-
-
-    raw_input("Press enter to end: ")
+    while True:
+        if (not current_frame is None):
+            cv2.imshow("Image",current_frame)
+        if cv2.waitKey(50)!=-1:
+            break
+    cv2.destroyAllWindows()
     p.Close()
