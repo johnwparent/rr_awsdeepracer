@@ -90,6 +90,7 @@ class DeepRacerCamera_impl(object):
                 self._image.is_bigendian = camdata.is_bigendian
                 frame = self._image
                 self._imagestream_broadcaster.AsyncSendPacket(frame,lambda:None)
+                time.sleep(.1)
     def getCurrentImage(self):
         with self._lock:
             return self._image
