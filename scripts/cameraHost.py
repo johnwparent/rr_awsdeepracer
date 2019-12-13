@@ -88,7 +88,8 @@ class DeepRacerCamera_impl(object):
                 self._image.step = camdata.step
                 self._image.encoding = camdata.encoding
                 self._image.is_bigendian = camdata.is_bigendian
-                self._imagestream_broadcaster.SendPacket(self._image)
+                frame = self._image
+                self._imagestream_broadcaster.AsyncSendPacket(frame,lambda:None)
     def getCurrentImage(self):
         with self._lock:
             return self._image
