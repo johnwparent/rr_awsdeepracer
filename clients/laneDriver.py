@@ -1,4 +1,3 @@
-from RobotRaconteur.Client import *
 import time
 import numpy as np
 import cv2
@@ -6,8 +5,8 @@ import sys
 import math
 import threading
 import logging
-sys.path.append("..")
-import lane_finder
+#######################REMOVE THE CLIENT IMPORT ##################
+from clients import lane_finder
 
 
 global cam_calibration, calibrate
@@ -83,8 +82,9 @@ class LaneDrive(object):
 
         new_steering_angle = compute_steering_angle(self._frame, self._lane_lines)
         self.c_drive_by_angle = stabilize_steering_angle(self.c_drive_by_angle, new_steering_angle, len(self._lane_lines))/33.33
-        print(self.c_drive_by_angle)
-        self._servo.Drive(0.65,self.c_drive_by_angle)
+        if self._servo is not None:
+            self._servo.Drive(0.65,self.c_drive_by_angle)
+        
 
 
     def detect_lane(self,frame):
@@ -94,7 +94,12 @@ class LaneDrive(object):
         lane_lines = lane_finder.average_slope_intercept(frame,lines)
         self._lane_lines = lane_lines
         self._frame = frame
-
+    @property
+    def lane_lines(self):
+        return self._lane_lines
+    @property
+    def frame(self):
+        return self._frame
 global current_frame
 global driver
 def WebcamImageToMat(image):
@@ -108,27 +113,4 @@ def next_frame(pipe_ep):
         driver.detect_lane(current_frame)
         driver.drive()
 
-
-if __name__ == '__main__':
-    
-
-    #connect to RR services needed to drive and get data
-    url_servo = 'rr+tcp://'+sys.argv[0]+':'+sys.argv[1]+'/?service=Servo'
-    url_camera = 'rr+tcp://'+sys.argv[0]+':'+sys.argv[1]+'/?service=AWSCamera'
-    servo_ctrl = RRN.ConnectService(url_servo)
-    cam_data = RRN.ConnectService(url_camera)
-    driver = LaneDrive(servo_ctrl)
-    
-    
-    #set up camera pipe stream
-    p = cam_data.ImageStream.Connect(-1)
-    p.PacketRecievedEvent+=next_frame
-
-
-    #start camera
-    try:
-        cam_data.Start()
-    except: pass
-    #calibrate camera
-    
 
