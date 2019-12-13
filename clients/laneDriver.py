@@ -6,7 +6,7 @@ import math
 import threading
 import logging
 #######################REMOVE THE CLIENT IMPORT ##################
-from clients import lane_finder
+import lane_finder
 
 
 global cam_calibration, calibrate
