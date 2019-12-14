@@ -86,7 +86,7 @@ class LaneDrive(object):
         if self._servo is not None:
 
                 
-            self._servo.Drive(0.71,self.c_drive_by_angle)
+            self._servo.Drive(0.45,self.c_drive_by_angle)
             print("drive command sent")
 
 
