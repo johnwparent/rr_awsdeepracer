@@ -81,7 +81,7 @@ class LaneDrive(object):
             return
 
         new_steering_angle = compute_steering_angle(self._frame, self._lane_lines)
-        drive_by_angle = stabilize_steering_angle(self.c_drive_by_angle, new_steering_angle, len(self._lane_lines))/33.33
+        drive_by_angle = stabilize_steering_angle(self.c_drive_by_angle, new_steering_angle, len(self._lane_lines))/33
         self.c_drive_by_angle = drive_by_angle
         if self._servo is not None:
             if not self._last_angle is None and abs(self._last_angle-self.c_drive_by_angle)>0.05:
