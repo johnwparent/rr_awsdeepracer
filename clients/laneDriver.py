@@ -86,7 +86,7 @@ class LaneDrive(object):
         if self._servo is not None:
 
                 
-            self._servo.Drive(0.4,self.c_drive_by_angle)
+            self._servo.Drive(0.65,self.c_drive_by_angle)
 
 
     def detect_lane(self,frame):
