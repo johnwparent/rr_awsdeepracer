@@ -57,7 +57,7 @@ class video_buffer(object):
             self.driver.detect_lane(frame)
             print("hello")
             self.driver.drive()
-            Print("world")
+            print("world")
 
 
 
