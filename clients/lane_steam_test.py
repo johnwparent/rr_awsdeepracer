@@ -6,7 +6,7 @@ import sys
 import threading
 import logging
 import keyboard
-import queue
+import Queue
 sys.path.append("..")
 import lane_finder
 import laneDriver
