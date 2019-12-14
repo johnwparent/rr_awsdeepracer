@@ -42,6 +42,7 @@ def main(frame):
 class video_buffer(object):
     def __init__(self,driver):
         self._queue_lock = threading.RLock()
+        self._queue_driver_lock = threading.RLock()
         self._queue = Queue.LifoQueue()
         self.driver = driver
         self.stopped = False    
@@ -52,7 +53,7 @@ class video_buffer(object):
 
     def thread_func(self):
         while not self.stopped and not self._queue.empty():
-            with self._queue_lock:
+            with self._queue_driver_lock:
                 frame = self._queue.get()
             self.driver.detect_lane(frame)
             self.driver.drive()
