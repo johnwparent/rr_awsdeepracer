@@ -6,6 +6,7 @@ import sys
 import threading
 import logging
 import keyboard
+import queue
 sys.path.append("..")
 import lane_finder
 import laneDriver
@@ -35,6 +36,30 @@ def main(frame):
     vid_im = nd_arr_transform(frame)
     out.write(vid_im)
 
+
+
+
+class video_buffer(object):
+    def __init__(self,driver):
+        self._queue_lock = threading.RLock()
+        self._queue = queue.LifoQueue()
+        self.driver = driver
+        self.stopped = False    
+    def add_queue(self,value):
+        with self._queue_lock:
+            self._queue.put(value)
+        
+
+    def thread_func(self):
+        while not self.stopped and not self._queue.empty():
+            with self._queue_lock:
+                frame = self._queue.get()
+            self.driver.detect_lane(frame)
+            self.driver.drive()
+
+
+
+
 if __name__ == '__main__':
 
     url_servo = 'rr+tcp://localhost:'+sys.argv[1]+'/?service=Servo'
@@ -44,6 +69,7 @@ if __name__ == '__main__':
     driver = laneDriver.LaneDrive(servo_ctrl)
     raw_input("press enter to begin: ")
     cam_data.startCamera()
+    vb = video_buffer(driver)
     time.sleep(0.3)
     im = cam_data.getCurrentImage()
     frame_width = im.width
@@ -52,8 +78,9 @@ if __name__ == '__main__':
     #out = cv2.VideoWriter('lane_real.avi',cv2.VideoWriter_fourcc(*'XVID'), 10, (frame_width,frame_height))
     while True:
         frame = image_stream(cam_data)
-        driver.detect_lane(frame)
-        driver.drive()
+        vb.add_queue(frame)
+        t = threading.Thread(target=vb.thread_func)
+        t.start()
         #lane_lines = driver.lane_lines
         #lane_line_image = display_lines(frame,lane_lines)
         #out.write(lane_line_image)
