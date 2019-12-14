@@ -42,7 +42,7 @@ def main(frame):
 class video_buffer(object):
     def __init__(self,driver):
         self._queue_lock = threading.RLock()
-        self._queue = queue.LifoQueue()
+        self._queue = Queue.LifoQueue()
         self.driver = driver
         self.stopped = False    
     def add_queue(self,value):
