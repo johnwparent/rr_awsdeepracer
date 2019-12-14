@@ -55,9 +55,7 @@ class video_buffer(object):
             with self._queue_lock:
                 frame = self._queue.get()
             self.driver.detect_lane(frame)
-            print("hello")
             self.driver.drive()
-            print("world")
 
 
 
