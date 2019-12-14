@@ -77,7 +77,7 @@ if __name__ == '__main__':
     frame_height = im.height
     #global out
     #out = cv2.VideoWriter('lane_real.avi',cv2.VideoWriter_fourcc(*'XVID'), 10, (frame_width,frame_height))
-    servo_ctrl.Drive(0.65,0)
+    servo_ctrl.Drive(0.8,0)
     while True:
         frame = image_stream(cam_data)
         vb.add_queue(frame)
