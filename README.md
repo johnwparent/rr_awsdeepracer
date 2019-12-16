@@ -2,6 +2,8 @@
 
 This repo serves as the source code for the catkin package hosting the ROS Nodes running the [Robot Raconteur](https://robotraconteur.com) services. These services expose the servo control and the DeepRacer's image stream provided by it's camera. 
 ___
+Collaborators: John Parent and Chukwuemeka Ike
+___
 
 ## Getting started:
 Installing this catkin package can be done by copying the root folder into a _catkin_ws/src_ folder within a ROS build. Then after starting ROS, running `$ catkin_make`  will build the catkin package and expose the RR services to ROS. Using GitHub, running `$ git clone https://github.com/johnwparent/rr_awsdeepracer.git` in the _catkin_ws/src_ directory and then running `catkin_make` will build the project in ROS. 
